@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <!-- Agregar el enlace al CDN de Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Estilos personalizados */
+        .input-style {
+            appearance: none;
+            border: 1px solid #d1d5db;
+            padding: 0.5rem;
+            margin-top: 0.3rem;
+            transition: all 0.3s ease-in-out;
+            width: 100%;
+        }
+
+        .input-style:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 1px #2563eb;
+        }
+
+        .button-style {
+            background-color: #2563eb;
+            color: #ffffff;
+            border: 1px solid transparent;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .button-style:hover {
+            background-color: #1e4bb7;
+        }
+
+        .button-style:focus {
+            border-color: #1e4bb7;
+            box-shadow: 0 0 0 1px #1e4bb7;
+        }
+
+                /* Estilo para el fondo animado */
+                .area {
+            background: #ffffff;
+            background: -webkit-linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%);
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 96%;
+            overflow: hidden;
+        }
+
+        .circles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(32, 92, 211, 0.554); /* Ajuste del color de los círculos */
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+
+        .circles li:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .circles li:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .circles li:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .circles li:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        .circles li:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+
+        .circles li:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+
+        .circles li:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+
+        .circles li:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="bg-white p-2 rounded-lg shadow-lg mt-4 mx-4">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <img class="mx-auto h-20 w-auto" src="https://www.tecnm.mx/images/tecnm_virtual/tecnm.png" alt="TecNM">
+            <h2 class="mt-6 text-center text-2xl font-extrabold text-gray-900">
+                Crea una cuenta
+            </h2>
+        </div>
+
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <form id="formulario-registro" class="space-y-2" action="#" method="POST">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+                    <div class="mt-1">
+                        <input type="text" name="name" id="name" class="input-style" placeholder="Juan" required="">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="last_name" class="block text-sm font-medium text-gray-700">Apellidos</label>
+                    <div class="mt-1">
+                        <input type="text" name="last_name" id="last_name" class="input-style" placeholder="Pérez González" required="">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+                    <div class="mt-1">
+                        <input type="email" name="email" id="email" class="input-style" placeholder="juan@example.com" required="">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="career" class="block text-sm font-medium text-gray-700">Carrera</label>
+                    <div class="mt-1">
+                        <select name="career" id="career" class="input-style" required="">
+                            <option value="" disabled selected>Seleccione una carrera</option>
+                            <option value="1">Ing. Sistemas Computacionales</option>
+                            <option value="2">Ing. Industrial</option>
+                            <option value="3">Ing. Gestión Empresarial</option>
+                            <option value="4">Ing. Mecatrónica</option>
+                            <option value="5">Ing. Logística</option>
+                            <option value="6">Ing. Electromecánica</option>
+                            <option value="7">Ing. Electrónica</option>
+                            <option value="8">Ing. Tics</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="student_id" class="block text-sm font-medium text-gray-700">Número de Control</label>
+                    <div class="mt-1">
+                        <input type="text" name="student_id" id="student_id" class="input-style" placeholder="20240000" required="">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                    <div class="mt-1">
+                        <input type="password" name="password" id="password" class="input-style" placeholder="••••••••" required="">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="confirm_password" class="block text-sm font-medium text-gray-700">Repetir Contraseña</label>
+                    <div class="mt-1">
+                        <input type="password" name="confirm_password" id="confirm_password" class="input-style" placeholder="••••••••" required="">
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="button-style">Crear cuenta</button>
+                </div>
+            </form>
+
+            <div class="mt-6">
+                <p class="text-center text-sm text-gray-600">
+                    ¿Ya tienes una cuenta? <a href="login.html" class="font-medium text-blue-600 hover:text-indigo-500">Inicia sesión aquí</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const formularioRegistro = document.getElementById('formulario-registro');
+
+            formularioRegistro.addEventListener('submit', async function(event) {
+                event.preventDefault(); // Prevenir que el formulario se envíe automáticamente
+
+                // Recolectar los datos del formulario
+                const formData = new FormData(formularioRegistro);
+                const datosUsuario = Object.fromEntries(formData.entries());
+
+                // Enviar una solicitud POST al servidor
+                try {
+                    const respuesta = await fetch('https://api-tecnm.onrender.com/registro', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(datosUsuario)
+                    });
+
+                    const data = await respuesta.json();
+
+                    if (respuesta.ok) {
+                        // Registro exitoso
+                        alert('¡Registro exitoso! Usuario registrado correctamente.');
+
+                        // Guardar los datos del usuario en localStorage
+                        localStorage.setItem('nombre', datosUsuario.name);
+                        localStorage.setItem('carrera', datosUsuario.career);
+                        localStorage.setItem('num_control', datosUsuario.student_id);
+
+                        // Redirigir al usuario a la página de inicio de sesión
+                        window.location.href = 'login.html';
+                    } else {
+                        // Error durante el registro
+                        alert('Error al registrar: ' + data.message);
+                    }
+                } catch (error) {
+                    console.error('Error al enviar la solicitud de registro:', error);
+                    alert('Error interno del servidor. Por favor, inténtelo de nuevo más tarde.');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

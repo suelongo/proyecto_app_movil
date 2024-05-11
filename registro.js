@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Enviar una solicitud POST al servidor
         try {
-            const respuesta = await fetch('http://localhost:3000/registro', {
+            const respuesta = await fetch('https://api-tecnm.onrender.com/registro', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

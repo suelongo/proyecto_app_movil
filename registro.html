@@ -161,6 +161,56 @@
                 border-radius: 50%;
             }
         }
+
+           /* Estilo para la animación de carga */
+           .loading-indicator {
+            display: none; /* Ocultar inicialmente */
+            position: absolute; /* Posicionamiento absoluto */
+            top: 50%; /* Centrado vertical */
+            left: 50%; /* Centrado horizontal */
+            transform: translate(-50%, -50%); /* Centrado en el medio */
+            z-index: 10; /* Asegurar que esté en frente de otros elementos */
+        }
+
+        .loading-indicator.active {
+            display: flex; /* Mostrar cuando está activo */
+        }
+
+        .loading-indicator .flex {
+            gap: 2px;
+        }
+
+        .loading-indicator .w-5,
+        .loading-indicator .h-5 {
+            width: 20px;
+            height: 20px;
+            background-color: #2563eb;
+        }
+
+
+        .loader {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+            background-color: #3b82f6; /* Color azul */
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.75);
+                opacity: 0.2;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.75);
+                opacity: 0.2;
+            }
+        }
+
     </style>
 </head>
 
@@ -179,6 +229,14 @@
             <li></li>
         </ul>
     </div>
+        <!-- Agregar la animación de carga -->
+        <div id="loader-container" class="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 hidden">
+            <div class="flex gap-2">
+                <div class="w-5 h-5 rounded-full animate-pulse bg-blue-600"></div>
+                <div class="w-5 h-5 rounded-full animate-pulse bg-blue-600"></div>
+                <div class="w-5 h-5 rounded-full animate-pulse bg-blue-600"></div>
+            </div>
+        </div>
     <div class="bg-white p-2 rounded-lg shadow-lg mt-4 mx-4">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
             <img class="mx-auto h-20 w-auto" src="https://www.tecnm.mx/images/tecnm_virtual/tecnm.png" alt="TecNM">
@@ -253,20 +311,28 @@
                 </div>
             </form>
 
-            <div class="mt-6">
-                <p class="text-center text-sm text-gray-600">
-                    ¿Ya tienes una cuenta? <a href="login.html" class="font-medium text-blue-600 hover:text-indigo-500">Inicia sesión aquí</a>
-                </p>
-            </div>
+
+                <div class="mt-6">
+                    <p class="text-center text-sm text-gray-600">
+                        ¿Ya tienes una cuenta? <a href="login.html" class="font-medium text-blue-600 hover:text-indigo-500">Inicia sesión aquí</a>
+                    </p>
+                </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const formularioRegistro = document.getElementById('formulario-registro');
+            const botonRegistro = document.querySelector('.button-style');
+            const loaderContainer = document.getElementById('loader-container'); // Agregamos el loader-container
 
             formularioRegistro.addEventListener('submit', async function(event) {
                 event.preventDefault(); // Prevenir que el formulario se envíe automáticamente
+
+                // Deshabilitar el botón y mostrar el indicador de carga
+                botonRegistro.disabled = true;
+                
+                loaderContainer.classList.remove('hidden');
 
                 // Recolectar los datos del formulario
                 const formData = new FormData(formularioRegistro);
@@ -286,12 +352,8 @@
 
                     if (respuesta.ok) {
                         // Registro exitoso
-                        alert('¡Registro exitoso! Usuario registrado correctamente.');
 
                         // Guardar los datos del usuario en localStorage
-                        localStorage.setItem('nombre', datosUsuario.name);
-                        localStorage.setItem('carrera', datosUsuario.career);
-                        localStorage.setItem('num_control', datosUsuario.student_id);
 
                         // Redirigir al usuario a la página de inicio de sesión
                         window.location.href = 'index.html';
@@ -302,6 +364,11 @@
                 } catch (error) {
                     console.error('Error al enviar la solicitud de registro:', error);
                     alert('Error interno del servidor. Por favor, inténtelo de nuevo más tarde.');
+                } finally {
+                    // Habilitar el botón y ocultar el indicador de carga
+                    botonRegistro.disabled = false;
+                    
+                    loaderContainer.classList.add('hidden');
                 }
             });
         });

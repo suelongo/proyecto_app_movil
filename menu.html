@@ -218,7 +218,7 @@
             <li></li>
         </ul>
     </div>
-
+    
     <div class="container mx-auto px-4 py-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
             <img class="mx-auto h-20 w-auto" src="https://www.tecnm.mx/images/tecnm_virtual/tecnm.png" alt="Tu Empresa">
@@ -273,7 +273,41 @@
         </div>
     </footer>
 
-    <script src="nombre.js"></script>
+    
+    <script>
+        // Ejecutar el script después de que la página se haya cargado completamente
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener el nombre del usuario del localStorage
+            const nombreUsuario = localStorage.getItem('nombre') || 'Invitado';
+            const welcomeMessage = `Bienvenido ${nombreUsuario}`;
+           
+            let index = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentText = welcomeMessage.slice(0, index + 1);
+                document.getElementById("typewriter").textContent = currentText;
+
+                if (!isDeleting) {
+                    index++;
+                } else {
+                    index--;
+                }
+
+                if (index === welcomeMessage.length) {
+                    isDeleting = true;
+                }
+
+                if (index === 0 && isDeleting) {
+                    isDeleting = false;
+                }
+
+                setTimeout(type, 150);
+            }
+
+            type();
+        });
+    </script>
 </body>
 
 </html>

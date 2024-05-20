@@ -4,27 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú</title>
-    <!-- Agregar el enlace al CDN de Tailwind CSS -->
+    <title>Consulta de Materias</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        /* Estilos personalizados */
-        .menu-option {
-            background-color: #ffffff;
-            border: 1px solid #d1d5db;
-            transition: all 0.3s ease-in-out;
+        #search-form {
+            margin-bottom: 20px; /* Ajusta el margen inferior del formulario de búsqueda */
         }
 
-        .menu-option:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Estilo para el footer */
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+        #menu-btn {
+            display: none; /* Oculta el botón de regresar al menú inicialmente */
         }
     </style>
     <style>
@@ -199,12 +188,12 @@
         -- End BackGround Animation 
         */
     </style>
+
 </head>
 
-<body class="bg-gray-50 dark:bg-gray-900">
-    <!-- Contenedor del fondo animado -->
+<body class="flex flex-col h-screen justify-between bg-gray-50 dark:bg-gray-900">
+    <!-- Fondo animado -->
     <div class="area">
-        <!-- Contenedor de las animaciones de círculos -->
         <ul class="circles">
             <li></li>
             <li></li>
@@ -218,53 +207,42 @@
             <li></li>
         </ul>
     </div>
+
+    <!-- Título -->
+    <div class="bg-blue-500 text-white p-4 flex justify-between items-center">
+        <h1 class="text-xl font-bold">Consulta tus Materias</h1>
+        <img class="h-12 w-auto" src="https://www.tecnm.mx/images/tecnm_virtual/tecnm.png" alt="Tu Empresa">
+    </div>
     
-    <div class="container mx-auto px-4 py-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <img class="mx-auto h-20 w-auto" src="https://www.tecnm.mx/images/tecnm_virtual/tecnm.png" alt="Tu Empresa">
-        </div>
-        <!-- Bienvenida -->
-        <div class="text-center mb-8">
-            <h1 id="typewriter" class="text-3xl font-semibold"></h1>
-        </div>
+    <!-- Formulario de búsqueda -->
+    <form id="search-form" class="max-w-sm mx-auto flex mt-4">
 
-        <!-- Opciones del menú -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <!-- Consultar materias -->
-            <a href="consulta_materias.html" class="menu-option bg-white rounded-lg overflow-hidden shadow-md">
-                <div class="p-2">
-                    <h2 class="text-xl text-center font-semibold mb-4">Consultar Materias</h2>
-                    <p class="text-center text-gray-600">Haz clic para consultar las materias disponibles</p>
-                </div>
-            </a>
+        <select id="semestre"
+            class="flex-grow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected>Escoge el semestre</option>
+            <option value="1">Semestre 1</option>
+            <option value="2">Semestre 2</option>
+            <option value="3">Semestre 3</option>
+            <option value="4">Semestre 4</option>
+            <option value="5">Semestre 5</option>
+            <option value="6">Semestre 6</option>
+            <option value="7">Semestre 7</option>
+            <option value="8">Semestre 8</option>
+            <option value="9">Semestre 9</option>
+        </select>
+        <button type="submit"
+            class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Buscar</button>
+    </form>
 
-            <!-- Consultar especialidad -->
-            <a href="consulta_especialiad.html" class="menu-option bg-white rounded-lg overflow-hidden shadow-md">
-                <div class="p-2">
-                    <h2 class="text-xl text-center font-semibold mb-4">Consultar Especialidad</h2>
-                    <p class="text-center text-gray-600">Haz clic para consultar las especialidades disponibles</p>
-                </div>
-            </a>
-        </div>
+    <!-- Contenedor de la tabla -->
+    <div id="tabla-contenedor" class="mt-4">
+        <!-- Aquí se insertará la tabla generada por JavaScript -->
+    </div>
 
-        <!-- Segunda fila de opciones del menú -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
-            <!-- Reticula -->
-            <a href="#" class="menu-option bg-white rounded-lg overflow-hidden shadow-md">
-                <div class="p-2">
-                    <h2 class="text-xl text-center font-semibold mb-4">Reticula</h2>
-                    <p class="text-center text-gray-600">Haz clic para ver la retícula de tu carrera</p>
-                </div>
-            </a>
-
-            <!-- Ubicaciones -->
-            <a href="#" class="menu-option bg-white rounded-lg overflow-hidden shadow-md">
-                <div class="p-2">
-                    <h2 class="text-xl text-center font-semibold mb-4">Ubicaciones</h2>
-                    <p class="text-center text-gray-600">Haz clic para ver las ubicaciones disponibles</p>
-                </div>
-            </a>
-        </div>
+    <!-- Botones de acción -->
+    <div id="menu-btn" class="max-w-sm mx-auto mt-4">
+        <button onclick="window.location.href='menu.html'"
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Regresar al Menú</button>
     </div>
 
     <footer class="bg-gray-800 py-3">
@@ -273,43 +251,53 @@
         </div>
     </footer>
 
-    
     <script>
-        // Ejecutar el script después de que la página se haya cargado completamente
-        document.addEventListener('DOMContentLoaded', function() {
-            // Obtener el nombre del usuario del localStorage
-            const nombreUsuario = localStorage.getItem('nombre') || 'Invitado';
-            const carrera = localStorage.getItem('carrera');
-            const welcomeMessage = `Bienvenido ${nombreUsuario}`;
-           
-            console.log(carrera);
-            let index = 0;
-            let isDeleting = false;
+        $(document).ready(function () {
+            $('#search-form').submit(function (event) {
+                event.preventDefault();
 
-            function type() {
-                const currentText = welcomeMessage.slice(0, index + 1);
-                document.getElementById("typewriter").textContent = currentText;
+                var semestre = $('#semestre').val();
+                var carrera = localStorage.getItem('carrera');
 
-                if (!isDeleting) {
-                    index++;
-                } else {
-                    index--;
-                }
+                $.ajax({
+                    url: 'https://api-tecnm.onrender.com/materias/' + carrera + '/' + semestre,
+                    method: 'GET',
+                    success: function (response) {
+                        actualizarTabla(response);
+                        $('#menu-btn').css('display', 'block'); // Hace visible el botón de regresar al menú
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error al obtener las materias:', error);
+                    }
+                });
+            });
 
-                if (index === welcomeMessage.length) {
-                    isDeleting = true;
-                }
+            function actualizarTabla(data) {
+                var tabla = '<div class="relative overflow-x-auto shadow-md sm:rounded-lg">' +
+                    '<table class="w-full text-sm text-left rtl:text-right text-blue-100 dark:text-blue-100">' +
+                    '<thead class="text-xs text-white uppercase bg-blue-600 dark:text-white">' +
+                    '<tr>' +
+                    '<th scope="col" class="px-6 py-3">Nombre</th>' +
+                    '<th scope="col" class="px-6 py-3">Semestre</th>' +
+                    '</tr>' +
+                    '</thead>' +
+                    '<tbody>';
 
-                if (index === 0 && isDeleting) {
-                    isDeleting = false;
-                }
+                data.forEach(function (materia) {
+                    tabla += '<tr class="bg-blue-500 border-b border-blue-400">' +
+                        '<td class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">' + materia.nombre + '</td>' +
+                        '<td class="px-6 py-4">' + materia.semestre + '</td>' +
+                        '</tr>';
+                });
 
-                setTimeout(type, 150);
+                tabla += '</tbody></table></div>';
+
+                $('#tabla-contenedor').html(tabla);
             }
-
-            type();
         });
     </script>
+
 </body>
 
 </html>
+

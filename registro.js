@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Enviar una solicitud POST al servidor
         try {
-            const respuesta = await fetch('https://api-tecnm.onrender.com/registro', {
+            const respuesta = await fetch('http://localhost:3000/registro', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (respuesta.ok) {
                 // Registro exitoso
-                alert('¡Registro exitoso! Usuario registrado correctamente.');
+                a
                 // Aquí podrías redirigir al usuario a otra página, mostrar un mensaje de éxito, etc.
             } else {
                 // Error durante el registro

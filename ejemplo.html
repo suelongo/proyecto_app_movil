@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú</title>
+    <title>Consulta de Especialidades</title>
     <!-- Agregar el enlace al CDN de Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
@@ -198,6 +198,7 @@
         /*
         -- End BackGround Animation 
         */
+        
     </style>
 </head>
 
@@ -218,52 +219,38 @@
             <li></li>
         </ul>
     </div>
+
+    <!-- El contenido de tu página aquí -->
+    <div class="container mx-auto px-0 py-0">
+        <!-- Agrega aquí el contenido de tu página -->
+        <div class="bg-blue-500 text-white p-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">Consulta de Especialidades</h1>
+            <img class="h-12 w-auto" src="https://www.tecnm.mx/images/tecnm_virtual/tecnm.png" alt="Tu Empresa">
+        </div>
     
-    <div class="container mx-auto px-4 py-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <img class="mx-auto h-20 w-auto" src="https://www.tecnm.mx/images/tecnm_virtual/tecnm.png" alt="Tu Empresa">
+        <!-- Dropdown para seleccionar especialidad -->
+        <!-- Contenedor flex para alinear el menú desplegable y el botón de selección -->
+     <!-- Contenedor flex para alinear el menú desplegable y el botón de selección -->
+<div class="relative mb-4 z-10 mt-8 flex justify-center items-center">
+    <!-- Menú desplegable -->
+    <button id="dropdown-btn" class="px-4 py-2 text-white bg-blue-500 rounded-md">Selecciona una especialidad</button>
+    <div id="dropdown" class="absolute left-0 w-40 mt-2 origin-top-left bg-white divide-y divide-gray-100 rounded-md shadow-lg hidden transition duration-300">
+        <div id="dropdown-options" class="py-1">
+            <!-- Las opciones se llenarán aquí -->
         </div>
-        <!-- Bienvenida -->
-        <div class="text-center mb-8">
-            <h1 id="typewriter" class="text-3xl font-semibold"></h1>
-        </div>
+    </div>
+    <!-- Botón de selección -->
+    <button id="btn-seleccionar" class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md">Seleccionar</button>
+</div>
 
-        <!-- Opciones del menú -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <!-- Consultar materias -->
-            <a href="consulta_materias.html" class="menu-option bg-white rounded-lg overflow-hidden shadow-md">
-                <div class="p-2">
-                    <h2 class="text-xl text-center font-semibold mb-4">Consultar Materias</h2>
-                    <p class="text-center text-gray-600">Haz clic para consultar las materias disponibles</p>
-                </div>
-            </a>
 
-            <!-- Consultar especialidad -->
-            <a href="consulta_especialiad.html" class="menu-option bg-white rounded-lg overflow-hidden shadow-md">
-                <div class="p-2">
-                    <h2 class="text-xl text-center font-semibold mb-4">Consultar Especialidad</h2>
-                    <p class="text-center text-gray-600">Haz clic para consultar las especialidades disponibles</p>
-                </div>
-            </a>
-        </div>
-
-        <!-- Segunda fila de opciones del menú -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
-            <!-- Reticula -->
-            <a href="#" class="menu-option bg-white rounded-lg overflow-hidden shadow-md">
-                <div class="p-2">
-                    <h2 class="text-xl text-center font-semibold mb-4">Reticula</h2>
-                    <p class="text-center text-gray-600">Haz clic para ver la retícula de tu carrera</p>
-                </div>
-            </a>
-
-            <!-- Ubicaciones -->
-            <a href="#" class="menu-option bg-white rounded-lg overflow-hidden shadow-md">
-                <div class="p-2">
-                    <h2 class="text-xl text-center font-semibold mb-4">Ubicaciones</h2>
-                    <p class="text-center text-gray-600">Haz clic para ver las ubicaciones disponibles</p>
-                </div>
-            </a>
+        <!-- Contenedor de la tabla -->
+        <div id="tabla-contenedor" class="w-full max-w-4xl mx-auto"></div>
+    
+        <!-- Botón de regresar al menú -->
+        <div id="menu-btn" class="max-w-sm mx-auto mt-4">
+            <button onclick="window.location.href='menu.html'"
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Regresar al Menú</button>
         </div>
     </div>
 
@@ -272,44 +259,83 @@
             <p>&copy; 2024 Josue y Adan Company. Todos los derechos reservados.</p>
         </div>
     </footer>
-
     
     <script>
-        // Ejecutar el script después de que la página se haya cargado completamente
-        document.addEventListener('DOMContentLoaded', function() {
-            // Obtener el nombre del usuario del localStorage
-            const nombreUsuario = localStorage.getItem('nombre') || 'Invitado';
-            const carrera = localStorage.getItem('carrera');
-            const welcomeMessage = `Bienvenido ${nombreUsuario}`;
-           
-            console.log(carrera);
-            let index = 0;
-            let isDeleting = false;
+             document.addEventListener('DOMContentLoaded', async () => {
+            const carrera = localStorage.getItem('carrera') || 1;
+            const dropdownOptions = document.getElementById('dropdown-options');
+            const dropdownBtn = document.getElementById('dropdown-btn');
+            const dropdown = document.getElementById('dropdown');
 
-            function type() {
-                const currentText = welcomeMessage.slice(0, index + 1);
-                document.getElementById("typewriter").textContent = currentText;
+            dropdownBtn.addEventListener('click', () => {
+                dropdown.classList.toggle('hidden');
+            });
 
-                if (!isDeleting) {
-                    index++;
-                } else {
-                    index--;
-                }
+            try {
+                const response = await fetch(`https://api-tecnm.onrender.com/especialidades/${carrera}`);
+                const data = await response.json();
 
-                if (index === welcomeMessage.length) {
-                    isDeleting = true;
-                }
-
-                if (index === 0 && isDeleting) {
-                    isDeleting = false;
-                }
-
-                setTimeout(type, 150);
+                data.forEach(especialidad => {
+                    const option = document.createElement('a');
+                    option.href = '#';
+                    option.className = 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100';
+                    option.textContent = especialidad.nombre;
+                    option.dataset.id = especialidad.id; // Asignar el id de la especialidad al dataset
+                    option.addEventListener('click', () => {
+                        document.querySelector('.selected')?.classList.remove('selected');
+                        option.classList.add('selected');
+                        dropdownBtn.textContent = especialidad.nombre;
+                        dropdown.classList.add('hidden');
+                    });
+                    dropdownOptions.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
             }
-
-            type();
         });
+
+        document.getElementById('btn-seleccionar').addEventListener('click', async () => {
+            const selectedOption = document.querySelector('.selected');
+            if (selectedOption) {
+                const especialidadId = selectedOption.dataset.id;
+                try {
+                    const response = await fetch(`https://api-tecnm.onrender.com/materias_especialidad/${especialidadId}`);
+                    const data = await response.json();
+                    actualizarTabla(data);
+                    document.getElementById('menu-btn').style.display = 'block'; // Hace visible el botón de regresar al menú
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            } else {
+                alert('No has seleccionado ninguna especialidad.');
+            }
+        });
+
+        function actualizarTabla(data) {
+            const tabla = `
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left text-blue-100">
+                        <thead class="text-xs text-white uppercase bg-blue-600">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">ID</th>
+                                <th scope="col" class="px-6 py-3">Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.map(materia => `
+                                <tr class="bg-blue-500 border-b border-blue-400">
+                                    <td class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap">${materia.id}</td>
+                                    <td class="px-6 py-4">${materia.nombre}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>`;
+            
+            document.getElementById('tabla-contenedor').innerHTML = tabla;
+        }
     </script>
 </body>
 
 </html>
+

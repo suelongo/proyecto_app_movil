@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <!-- Agregar el enlace al CDN de Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Estilos personalizados */
+        .menu-option {
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para el fondo animado */
+        .area {
+            background: #ffffff;
+            background: -webkit-linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%);
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 96%;
+            overflow: hidden;
+        }
+
+        .circles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(32, 92, 211, 0.554); /* Ajuste del color de los círculos */
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+        .circles li:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .circles li:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .circles li:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .circles li:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        .circles li:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+
+        .circles li:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+
+        .circles li:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+
+        .circles li:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+
+        /* Estilo para la animación de carga */
+        .loader {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+            background-color: #3b82f6; /* Color azul */
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.75);
+                opacity: 0.2;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.75);
+                opacity: 0.2;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white-100 flex justify-center items-center h-screen relative">
+    <!-- Fondo animado -->
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <!-- Agregar la animación de carga -->
+    <div id="loader-container" class="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 hidden">
+        <div class="flex gap-2">
+            <div class="w-5 h-5 rounded-full animate-pulse bg-blue-600"></div>
+            <div class="w-5 h-5 rounded-full animate-pulse bg-blue-600"></div>
+            <div class="w-5 h-5 rounded-full animate-pulse bg-blue-600"></div>
+        </div>
+    </div>
+
+    <div class="bg-white p-8 rounded-lg shadow-lg mx-4">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <img class="mx-auto h-20 w-auto" src="https://www.tecnm.mx/images/tecnm_virtual/tecnm.png" alt="Tu Empresa">
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                Bienvenido!
+            </h2>
+        </div>
+
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <form id="formulario-login" class="space-y-6" action="#" method="POST">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+                    <div class="mt-1">
+                        <input id="email" name="email" type="email" autocomplete="email" required
+                            class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                    <div class="mt-1">
+                        <input id="password" name="password" type="password" autocomplete="current-password"
+                            required
+                            class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <!-- Botón de inicio de sesión -->
+                    <button id="btn-login" type="submit"
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Iniciar sesión
+                    </button>
+                </div>
+                <div id="error-message" class="text-red-500 text-sm text-center hidden">
+                    Credenciales inválidas. Por favor, inténtelo de nuevo.
+                </div>
+            </form>
+
+            <div class="mt-6">
+                <p class="text-center text-sm text-gray-600">
+                    ¿No tienes una cuenta? <a href="registro.html"
+                        class="font-medium text-blue-600 hover:text-indigo-500">Regístrate ahora</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const formularioLogin = document.getElementById('formulario-login');
+    const btnLogin = document.getElementById('btn-login');
+    const loaderContainer = document.getElementById('loader-container');
+    const errorMessage = document.getElementById('error-message'); // Elemento para mostrar el mensaje de error
+
+    let isBtnClicked = false;
+
+    formularioLogin.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        if (isBtnClicked) return;
+
+        btnLogin.disabled = true;
+        isBtnClicked = true;
+        loaderContainer.classList.remove('hidden');
+
+        const formData = new FormData(formularioLogin);
+        const datosLogin = Object.fromEntries(formData.entries());
+
+        try {
+            const respuesta = await fetch('https://api-tecnm.onrender.com/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datosLogin)
+            });
+
+            const data = await respuesta.json();
+
+            if (respuesta.ok) {
+                localStorage.setItem('email', datosLogin.email);
+                localStorage.setItem('nombre', data.nombre);
+                localStorage.setItem('carrera', data.carrera);
+                
+                setTimeout(function() {
+                    window.location.href = 'menu.html';
+                });
+            } else {
+                // Mostrar el mensaje de error si ocurre un error durante el inicio de sesión
+                errorMessage.classList.remove('hidden');
+            }
+        } catch (error) {
+            console.error('Error al enviar la solicitud de inicio de sesión:', error);
+            alert('Error interno del servidor. Por favor, inténtelo de nuevo más tarde.');
+        } finally {
+            btnLogin.disabled = false;
+            loaderContainer.classList.add('hidden');
+            isBtnClicked = false; // Restablecer el estado del botón
+        }
+    });
+});
+
+    </script>
+</body>
+
+</html>

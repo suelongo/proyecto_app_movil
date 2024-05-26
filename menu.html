@@ -221,7 +221,13 @@
     
     <div class="container mx-auto px-4 py-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <!-- Imagen de tu empresa -->
             <img class="mx-auto h-20 w-auto" src="https://www.tecnm.mx/images/tecnm_virtual/tecnm.png" alt="Tu Empresa">
+    
+            <!-- Botón de logout -->
+            <a id="logoutBtn" class="block text-right mt-2" href="#">
+                <img src="campus/exit.png" alt="Salir" class="h-8 w-8">
+            </a>
         </div>
         <!-- Bienvenida -->
         <div class="text-center mb-8">
@@ -250,7 +256,7 @@
         <!-- Segunda fila de opciones del menú -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
             <!-- Reticula -->
-            <a href="#" class="menu-option bg-white rounded-lg overflow-hidden shadow-md">
+            <a href="reticula.html" class="menu-option bg-white rounded-lg overflow-hidden shadow-md">
                 <div class="p-2">
                     <h2 class="text-xl text-center font-semibold mb-4">Reticula</h2>
                     <p class="text-center text-gray-600">Haz clic para ver la retícula de tu carrera</p>
@@ -258,7 +264,7 @@
             </a>
 
             <!-- Ubicaciones -->
-            <a href="#" class="menu-option bg-white rounded-lg overflow-hidden shadow-md">
+            <a href="mapa.html" class="menu-option bg-white rounded-lg overflow-hidden shadow-md">
                 <div class="p-2">
                     <h2 class="text-xl text-center font-semibold mb-4">Ubicaciones</h2>
                     <p class="text-center text-gray-600">Haz clic para ver las ubicaciones disponibles</p>
@@ -308,6 +314,22 @@
             }
 
             type();
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener el botón de logout
+            const logoutBtn = document.getElementById('logoutBtn');
+    
+            // Escuchar el evento de clic en el botón de logout
+            logoutBtn.addEventListener('click', function() {
+                // Limpiar los datos del localStorage
+                localStorage.removeItem('nombre');
+                localStorage.removeItem('carrera');
+    
+                // Redirigir a login.html
+                window.location.href = 'login.html';
+            });
         });
     </script>
 </body>

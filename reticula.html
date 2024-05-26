@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfaz con Tailwind CSS</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Estilo para hacer el contenedor de imágenes responsive */
+        #image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #image-container img {
+            max-width: calc(100% - 20px); /* Reduciendo el ancho para dar espacio a los márgenes */
+            height: auto;
+            margin: 5px;
+            border-radius: 5px; /* Añadiendo bordes redondeados */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añadiendo sombreado */
+        }
+
+        /* Estilo para el fondo animado */
+        .area {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .circles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(32, 92, 211, 0.554); /* Ajuste del color de los círculos */
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+        .circles li:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .circles li:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .circles li:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .circles li:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        .circles li:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+
+        .circles li:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+
+        .circles li:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+
+        .circles li:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center justify-between min-h-screen bg-gray-100">
+
+    <!-- Fondo animado -->
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <!-- Título -->
+    <div class="bg-blue-500 text-white p-4 flex justify-between items-center w-full">
+        <h1 class="text-xl font-bold">Consulta la Reticula</h1>
+        <img class="h-12 w-auto" src="https://www.tecnm.mx/images/tecnm_virtual/tecnm.png" alt="Tu Empresa">
+    </div>
+
+    <!-- Contenedor de imágenes -->
+    <div id="image-container" class="text-center"></div>
+    <div class="my-4">
+        <button onclick="window.location.href='menu.html'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Regresar al Menú</button>
+    </div>
+    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const imageContainer = document.getElementById('image-container');
+            const carrera = localStorage.getItem('carrera');
+
+            let images = [];
+            switch (carrera) {
+                case '1':
+                    images = ['1.jpg', '2.jpg'];
+                    break;
+                case '2':
+                    images = ['3.jpg', '4.jpg'];
+                    break;
+                case '8':
+                    images = ['10.jpg'];
+                    break;
+                default:
+                    imageContainer.innerHTML = "<p class='text-xl text-red-500'>No disponible por el momento</p>";
+                    return;
+            }
+
+            images.forEach(image => {
+                const imgElement = document.createElement('img');
+                imgElement.src = `/reticulas/${image}`;
+                imgElement.alt = image;
+                imgElement.className = 'mx-auto my-2';
+                imageContainer.appendChild(imgElement);
+            });
+        });
+    </script>
+
+    <!-- Botón para regresar al menú -->
+    <div class="my-4">
+        <button onclick="window.location.href='menu.html'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Regresar al Menú</button>
+    </div>
+    <footer class="bg-gray-800 py-3 fixed bottom-0 w-full">
+        <div class="container mx-auto text-center text-white">
+            <p>&copy; 2024 Josue y Adan Company. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    
+
+</body>
+
+</html>

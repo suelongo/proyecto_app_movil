@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Campus</title>
+    <!-- Agregar el enlace al CDN de Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<style>
+    /* Pegar el CSS del fondo animado aquí */
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    /*Start Animations*/
+    @-webkit-keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0;
+        }
+        to {
+            top: 0;
+            opacity: 1;
+        }
+    }
+    @keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0;
+        }
+        to {
+            top: 0;
+            opacity: 1;
+        }
+    }
+    @-webkit-keyframes zoomIn {
+        0% {
+            opacity: 0;
+            -webkit-transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.3, 0.3, 0.3);
+        }
+        50% {
+            opacity: 1;
+        }
+    }
+    @keyframes zoomIn {
+        0% {
+            opacity: 0;
+            -webkit-transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.3, 0.3, 0.3);
+        }
+        50% {
+            opacity: 1;
+        }
+    }
+    /*End Animations*/
+    /*
+    -- Start BackGround Animation 
+    */
+    .area {
+        background: #ffffff;
+        background: -webkit-linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%);
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .circles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 96%;
+        overflow: hidden;
+    }
+
+    .circles li {
+        position: absolute;
+        display: block;
+        list-style: none;
+        width: 20px;
+        height: 20px;
+        background: rgba(32, 92, 211, 0.554); /* Ajuste del color de los círculos */
+        animation: animate 25s linear infinite;
+        bottom: -150px;
+    }
+
+    .circles li:nth-child(1) {
+        left: 25%;
+        width: 80px;
+        height: 80px;
+        animation-delay: 0s;
+    }
+
+    .circles li:nth-child(2) {
+        left: 10%;
+        width: 20px;
+        height: 20px;
+        animation-delay: 2s;
+        animation-duration: 12s;
+    }
+
+    .circles li:nth-child(3) {
+        left: 70%;
+        width: 20px;
+        height: 20px;
+        animation-delay: 4s;
+    }
+
+    .circles li:nth-child(4) {
+        left: 40%;
+        width: 60px;
+        height: 60px;
+        animation-delay: 0s;
+        animation-duration: 18s;
+    }
+
+    .circles li:nth-child(5) {
+        left: 65%;
+        width: 20px;
+        height: 20px;
+        animation-delay: 0s;
+    }
+
+    .circles li:nth-child(6) {
+        left: 75%;
+        width: 110px;
+        height: 110px;
+        animation-delay: 3s;
+    }
+
+    .circles li:nth-child(7) {
+        left: 35%;
+        width: 150px;
+        height: 150px;
+        animation-delay: 7s;
+    }
+
+    .circles li:nth-child(8) {
+        left: 50%;
+        width: 25px;
+        height: 25px;
+        animation-delay: 15s;
+        animation-duration: 45s;
+    }
+
+    .circles li:nth-child(9) {
+        left: 20%;
+        width: 15px;
+        height: 15px;
+        animation-delay: 2s;
+        animation-duration: 35s;
+    }
+
+    .circles li:nth-child(10) {
+        left: 85%;
+        width: 150px;
+        height: 150px;
+        animation-delay: 0s;
+        animation-duration: 11s;
+    }
+
+    @keyframes animate {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+            border-radius: 0;
+        }
+
+        100% {
+            transform: translateY(-1000px) rotate(720deg);
+            opacity: 0;
+            border-radius: 50%;
+        }
+    }
+    /*
+    -- End BackGround Animation 
+    */
+</style>
+<body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Contenedor del fondo animado -->
+    <div class="area">
+        <!-- Contenedor de las animaciones de círculos -->
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="bg-blue-500 text-white p-4 flex justify-between items-center">
+        <h1 class="text-xl font-bold">Consulta el mapa</h1>
+        <img class="h-12 w-auto" src="https://www.tecnm.mx/images/tecnm_virtual/tecnm.png" alt="Tu Empresa">
+    </div>
+
+    <!-- El contenido de tu página aquí -->
+    <div class="container mx-auto px-4 py-4">
+        <!-- Dropdown para seleccionar el campus -->
+        <div class="relative mb-4 z-10 mt-8 flex justify-center items-center">
+            <!-- Menú desplegable -->
+            <button id="dropdown-btn" class="px-4 py-2 text-white bg-blue-500 rounded-md">Selecciona un campus</button>
+            <div id="dropdown" class="absolute left-0 w-40 mt-2 origin-top-left bg-white divide-y divide-gray-100 rounded-md shadow-lg hidden transition duration-300">
+                <div id="dropdown-options" class="py-1">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-campus="1">Campus 1</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-campus="2">Campus 2</a>
+                </div>
+            </div>
+            <!-- Botón de selección -->
+            <button id="btn-seleccionar" class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md">Seleccionar</button>
+        </div>
+
+        <!-- Contenedor para mostrar la imagen y el mapa -->
+        <div id="contenido" class="flex justify-center items-center flex-col hidden transition duration-500">
+            <div id="imagen-container" class="my-4 hidden bg-white rounded-lg shadow-md">
+                <img id="imagen-campus" src="" alt="Imagen del campus">
+            </div>
+            <div id="mapa-container" class="my-4 hidden bg-white rounded-lg shadow-md">
+                <div id="mapa"></div>
+            </div>
+        </div>
+        
+        <!-- Botón de regresar al menú -->
+        <div id="menu-btn" class="max-w-sm mx-auto mt-4 hidden">
+            <button onclick="window.location.href='menu.html'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Regresar al Menú</button>
+        </div>
+    </div>
+    <footer class="bg-gray-800 py-3 fixed bottom-0 w-full">
+        <div class="container mx-auto text-center text-white">
+            <p>&copy; 2024 Josue y Adan Company. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdownOptions = document.getElementById('dropdown-options');
+            const dropdownBtn = document.getElementById('dropdown-btn');
+            const dropdown = document.getElementById('dropdown');
+            const contenido = document.getElementById('contenido');
+            const imagenCampus = document.getElementById('imagen-campus');
+            const mapa = document.getElementById('mapa');
+            const imagenContainer = document.getElementById('imagen-container');
+            const mapaContainer = document.getElementById('mapa-container');
+            const menuBtn = document.getElementById('menu-btn');
+
+            dropdownBtn.addEventListener('click', () => {
+                dropdown.classList.toggle('hidden');
+            });
+
+            // Event listener para las opciones del dropdown
+            dropdownOptions.querySelectorAll('a').forEach(option => {
+                option.addEventListener('click', () => {
+                    dropdownBtn.textContent = option.textContent; // Actualizar el texto del botón
+                    dropdown.classList.add('hidden'); // Ocultar el dropdown
+                });
+            });
+
+            // Event listener para el botón de seleccionar
+            document.getElementById('btn-seleccionar').addEventListener('click', () => {
+                const campus = dropdownBtn.textContent.trim(); // Obtener el texto del botón
+                contenido.classList.remove('hidden'); // Mostrar el contenido
+
+                // Mostrar la imagen correspondiente al campus
+                if (campus === 'Campus 1') {
+                    imagenCampus.src = 'campus/campus-1.jpeg';
+                } else if (campus === 'Campus 2') {
+                    imagenCampus.src = 'campus/campus-2.jpeg';
+                }
+
+                // Mostrar el mapa correspondiente al campus
+                if (campus === 'Campus 1') {
+                    mapa.innerHTML = `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3722.0836470906042!2d-101.63007312476718!3d21.109231085009853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bbe6f8e8cdbf7%3A0xff3c8cc2b5af98fc!2sInstituto%20Tecnol%C3%B3gico%20de%20Le%C3%B3n!5e0!3m2!1ses!2smx!4v1716685935629!5m2!1ses!2smx" width="390" height="300" style="border:0.5;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+                } else if (campus === 'Campus 2') {
+                    mapa.innerHTML = `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.320157475972!2d-101.72462901898312!3d21.139653533798217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bc0bd2f070cdf%3A0x309ab63431bf8b30!2sInstituto%20Tecnologico%20de%20Le%C3%B3n%20Campus%20II!5e0!3m2!1ses!2smx!4v1716686110835!5m2!1ses!2smx" width="390" height="300" style="border:0.5;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+                }
+
+                // Mostrar la imagen y el mapa con una transición suave
+                setTimeout(() => {
+                    imagenContainer.classList.remove('hidden');
+                    mapaContainer.classList.remove('hidden');
+                    menuBtn.classList.remove('hidden'); // Mostrar el botón de regresar al menú
+                }, 500); // Selecciona un valor que coincida con la duración de la transición CSS
+            });
+        });
+    </script>
+</body>
+
+</html>
